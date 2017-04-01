@@ -52,6 +52,9 @@ class User extends Authenticatable
       else {
         $this->attributes['role'] = -1;
       }
+    }
 
+    public function tenant(){
+      return $this->belongsTo('App\Tenant');
     }
 }
