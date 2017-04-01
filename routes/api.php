@@ -18,7 +18,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/user', function (Request $request) {
         return $request->user()->tenant()->count();
     });
-    Route::group(['prefix' => 'tenant'], function() {
+    Route::group(['prefix' => 'tenant','middleware'=>'tenant'], function() {
       Route::post('/profile', 'TenantController@profile');
       Route::post('/update-profile', 'TenantController@update_profile');
     });

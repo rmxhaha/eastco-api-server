@@ -12,8 +12,11 @@ class TenantController extends Controller
         'description' => 'required|max:255',
         'tenant_name' => 'required|max:255'
       ]);
+      $user = $request->user();
+      if( $user->role != "tenant" ){
 
-      $tenant = $request->user()->tenant();
+      }
+      $tenant = $user->tenant();
       if( $tenant->count() == 0 ){
         $tenant = Tenant::create([
           'user_id' => $request->user()->id,
