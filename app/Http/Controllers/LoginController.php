@@ -26,7 +26,8 @@ class LoginController extends Controller
 
         return response()->json([
           'status' => 'ok',
-          'token' => $api_token
+          'token' => $api_token,
+          'role' => $user->role
         ]);
       }
       else {

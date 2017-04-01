@@ -13,11 +13,12 @@ class RegisterController extends Controller
         'username' => 'required|max:255|unique:users',
         'phonenumber' => 'required|max:255|unique:users',
         'password' => 'required|max:255',
+        'role' => 'required|in:tenant,user'
       ]);
 
       $api_token = str_random(60);
 
-      $data = $request->only(['username','password','phonenumber']);
+      $data = $request->only(['username','password','phonenumber','role']);
       $data['api_token'] = $api_token;
       $data['password'] = Hash::make( $data['password'] );
       $user = User::create($data);

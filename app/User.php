@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','api_token', 'phonenumber', 'password',
+        'username','api_token', 'phonenumber', 'password', 'role'
     ];
 
     /**
@@ -26,4 +26,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role_str(){
+      if( $this->role == 0 )
+        return "user";
+      else if( $this->role == 1 )
+        return "tenant";
+    }
+
+    public function getRoleAttribute($value){
+      if( $value == 0 )
+        return "user";
+      else if($value == 1 )
+        return "tenant";
+      else {
+        return "unknown";
+      }
+    }
+
+    public function setRoleAttribute($value){
+      if( $value == "user" )
+        $this->attributes['role'] = 0;
+      else if($value == "tenant")
+        $this->attributes['role'] = 1;
+      else {
+        $this->attributes['role'] = -1;
+      }
+
+    }
 }
