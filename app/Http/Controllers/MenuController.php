@@ -22,6 +22,8 @@ class MenuController extends Controller
 
       $tenant = $tenant->first();
 
-      return response()->json($tenant->menu);
+      return response()->json([
+        'menus' => $tenant->menus
+      ]);
     }
 }
