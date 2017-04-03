@@ -12,36 +12,18 @@ class TenantController extends Controller
         'description' => 'required|max:255',
         'tenant_name' => 'required|max:255'
       ]);
-      $user = $request->user();
-      if( $user->role != "tenant" ){
-
-      }
-      $tenant = $user->tenant();
-      if( $tenant->count() == 0 ){
-        $tenant = Tenant::create([
-          'user_id' => $request->user()->id,
-          'description' => 'No Description Yet',
-          'tenant_name' => 'Tenant Anonymous'
-        ]);
-      }
+      $tenant = $request->user()->tenant;
 
       $tenant->update($request->only([
         'description', 'tenant_name'
       ]));
 
-      return $tenant;
+      return response()->json($tenant);
     }
 
     public function profile(Request $request){
-      $tenant = $request->user()->tenant();
-      if( $tenant->count() == 0 ){
-        $tenant = Tenant::create([
-          'user_id' => $request->user()->id,
-          'description' => 'No Description Yet',
-          'tenant_name' => 'Tenant Anonymous'
-        ]);
-      }
+      $tenant = $request->user()->tenant;
 
-      return $tenant;
+      return response()->json($tenant);
     }
 }

@@ -27,13 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role_str(){
-      if( $this->role == 0 )
-        return "user";
-      else if( $this->role == 1 )
-        return "tenant";
-    }
-
     public function getRoleAttribute($value){
       if( $value == 0 )
         return "user";
@@ -55,6 +48,6 @@ class User extends Authenticatable
     }
 
     public function tenant(){
-      return $this->belongsTo('App\Tenant');
+      return $this->belongsTo('App\Tenant','id','user_id');
     }
 }
