@@ -29,7 +29,7 @@ Route::group(['prefix' => 'v1'], function() {
 
       Route::get('/menu', 'TenantController@all_menu');
       Route::post('/menu', 'TenantController@new_menu');
-      Route::delete('/menu', 'TenantController@delete_menu');
+      Route::delete('/menu/{menu_id}', 'TenantController@delete_menu');
 
     });
   });
