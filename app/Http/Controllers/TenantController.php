@@ -12,13 +12,28 @@ class TenantController extends Controller
     public function update_profile(Request $request){
       $this->validate($request,[
         'description' => 'required|max:255',
-        'tenant_name' => 'required|max:255'
+        'tenant_name' => 'required|max:255',
+        'cover_picture' => 'file|image|max:4096'
       ]);
+
+
       $tenant = $request->user()->tenant;
 
-      $tenant->update($request->only([
+      $up_data = collect($request->only([
         'description', 'tenant_name'
       ]));
+
+      if( $request->cover_picture != NULL ){
+        if( $tenant->cover_picture != NULL )
+          Storage::delete( $tenant->cover_picture );
+
+        $path = $request->cover_picture->store('cover_picture');
+        $up_data = $up_data->merge([
+          'cover_picture' => $path
+        ]);
+      }
+      $tenant->update($up_data->all());
+
 
       return response()->json($tenant);
     }
