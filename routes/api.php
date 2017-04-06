@@ -23,13 +23,15 @@ Route::group(['prefix' => 'v1'], function() {
     Route::group(['prefix'=>'order'], function(){
       Route::get('/history','UserOrderController@get_history');
       Route::get('/ongoing','UserOrderController@get_ongoing');
-      Route::post('/','UserOrderController@new_transaction');
+      Route::get('/cart','UserOrderController@get_cart');
+      Route::post('/add_to_cart','UserOrderController@add_to_cart');
+      Route::post('/checkout','UserOrderController@checkout');
     });
 
     // viewing menu use case
     Route::group(['prefix' => 'menu'], function(){
       Route::get('/', 'MenuController@all_tenant');
-      Route::get('/{tenant_id}/', 'MenuController@tenant_menu')->where('tenant_id', '[0-9]+');;
+      Route::get('/{tenant_id}/', 'MenuController@tenant_menu')->where('tenant_id', '[0-9]+');
     });
 
     // tenant use case

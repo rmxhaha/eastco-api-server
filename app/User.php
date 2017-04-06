@@ -54,4 +54,16 @@ class User extends Authenticatable
     public function orders(){
       return $this->hasMany('App\Order','orderer_id','id');
     }
+
+    public function finished_orders(){
+      return $this->orders()->whereIn('status', [800, 900]);
+    }
+
+    public function cart(){
+      return $this->orders()->whereIn('status', [100])->first();
+    }
+
+    public function ongoing_orders(){
+      return $this->orders()->whereIn('status', [200, 201, 300]);
+    }
 }
