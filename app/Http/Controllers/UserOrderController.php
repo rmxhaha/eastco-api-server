@@ -77,7 +77,7 @@ class UserOrderController extends Controller
 
     public function checkout(Request $request){
       $this->validate($request,[
-        'address_description' => 'required|max:255',
+        'address_description' => 'max:255',
         'address_id' => 'required|integer|min:0|exists:addresses,id',
       ]);
 
@@ -89,7 +89,7 @@ class UserOrderController extends Controller
           'message'=>'You haven\'t added anything to your cart'
         ],422);
 
-      $total_price = collect( $cart->details() )->map(function($detail){
+      $total_price = collect( $cart->details )->map(function($detail){
         return $detail->menu_price * $detail->amount;
       })->reduce(function($carry, $item){
         return $carry + $item;

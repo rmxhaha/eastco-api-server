@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     //
-    protected $fillable = ['address_description','address_id','total_cost','tenant_id','orderer_id','status'];
+    protected $fillable = ['address_description','address_id','total_price','tenant_id','orderer_id','status'];
     protected $hidden = ['created_at','updated_at'];
 
     private static $status_str_map = [
@@ -39,14 +39,14 @@ class Order extends Model
 
     public function setStatusAttribute($value){
       $status_map = collect( self::$status_str_map)->flip()->all();
-      if( $status_map[$value] == null )
+      if( !array_key_exists($value, $status_map) )
         return "unknown";
       else
-        return $status_map[$value];
+        $this->attributes['status'] = $status_map[$value];
     }
 
     public function getStatusAttribute($value){
-      if( self::$status_str_map[$value] == null )
+      if( !array_key_exists($value, self::$status_str_map) )
         return 1000;
       else
         return self::$status_str_map[$value];
