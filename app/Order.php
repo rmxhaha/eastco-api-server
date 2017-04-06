@@ -21,7 +21,7 @@ class Order extends Model
     ];
 
     public function orderer(){
-      return $this->belongsTo('App\User','id','orderer_id');
+      return $this->belongsTo('App\User','orderer_id','id');
     }
 
     public function tenant(){
