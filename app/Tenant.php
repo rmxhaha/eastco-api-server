@@ -24,4 +24,12 @@ class Tenant extends Model
     public function orders(){
       return $this->hasMany('App\Order','tenant_id','id');
     }
+
+    public function ongoing_orders(){
+      return $this->orders()->whereIn('status', [200, 201, 300]);
+    }
+
+    public function finished_orders(){
+      return $this->orders()->whereIn('status', [800, 900]);
+    }
 }
