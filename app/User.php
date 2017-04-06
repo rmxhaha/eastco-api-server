@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function tenant(){
       return $this->belongsTo('App\Tenant','id','user_id');
     }
+
+    public function orders(){
+      return $this->hasMany('App\Order','orderer_id','id');
+    }
 }
