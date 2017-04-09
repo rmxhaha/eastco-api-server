@@ -51,10 +51,11 @@ Route::group(['prefix' => 'v1'], function() {
       Route::group(['prefix'=>'order'], function(){
         Route::get('/history', 'TenantOrderController@history');
         Route::get('/ongoing', 'TenantOrderController@ongoing');
-
-        Route::post('/ongoing/{id}/accept/', 'TenantOrderController@accept_order');
-        Route::post('/ongoing/{id}/deny/', 'TenantOrderController@deny_order');
-        Route::post('/ongoing/{id}/cancel/', 'TenantOrderController@cancel_order'); // ? in case di butuhkan cancel manual
+        Route::group(['middleware'=>'myorder'], function(){
+          Route::post('/ongoing/{order_id}/accept/', 'TenantOrderController@accept_order');
+          Route::post('/ongoing/{order_id}/deny/', 'TenantOrderController@deny_order');
+          Route::post('/ongoing/{order_id}/cancel/', 'TenantOrderController@cancel_order'); // ? in case di butuhkan cancel manual
+        });
       });
 
     });
