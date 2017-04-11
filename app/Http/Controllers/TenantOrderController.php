@@ -8,8 +8,13 @@ class TenantOrderController extends Controller
 {
     //
     public function ongoing(Request $request){
+      $transactions = $request->user()->tenant->ongoing_orders;
+      foreach($transactions as $trans){
+        $trans->orderer();
+        $trans->details();
+      }
       return response()->json([
-        'transactions' => $request->user()->tenant->ongoing_orders
+        'transactions' => $transactions
       ]);
     }
 

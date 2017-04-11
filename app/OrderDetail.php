@@ -14,4 +14,8 @@ class OrderDetail extends Model
     public function order(){
       return $this->belongsTo('App\Order');
     }
+
+    public function menu(){
+      return $this->belongsTo('App\Menu','menu_id','id');
+    }
 }

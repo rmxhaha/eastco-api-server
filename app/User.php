@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','updated_at','created_at','api_token'
     ];
 
     public function getRoleAttribute($value){

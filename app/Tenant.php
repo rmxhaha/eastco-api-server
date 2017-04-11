@@ -26,10 +26,10 @@ class Tenant extends Model
     }
 
     public function ongoing_orders(){
-      return $this->orders()->whereIn('status', [200, 201, 300]);
+      return $this->orders()->whereIn('status', [200, 201, 300])->with('orderer')->with('details')->with('address')->with('details.menu');
     }
 
     public function finished_orders(){
-      return $this->orders()->whereIn('status', [800, 900]);
+      return $this->orders()->whereIn('status', [800, 900])->with('orderer')->with('details')->with('address');
     }
 }
