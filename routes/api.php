@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1'], function() {
           Route::post('/ongoing/{order_id}/accept/', 'TenantOrderController@accept_order');
           Route::post('/ongoing/{order_id}/deny/', 'TenantOrderController@deny_order');
           Route::post('/ongoing/{order_id}/cancel/', 'TenantOrderController@cancel_order'); // ? in case di butuhkan cancel manual
+          Route::post('/ongoing/{order_id}/ready_to_deliver/', 'TenantOrderController@ready_to_deliver'); // ? in case di butuhkan cancel manual
         });
       });
 

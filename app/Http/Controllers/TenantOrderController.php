@@ -61,4 +61,16 @@ class TenantOrderController extends Controller
       $order->update(['status'=>'canceled']);
       return response()->json(['status' => 'ok', 'message'=> 'successfully canceled']);
     }
+
+    public function ready_to_deliver(Request $request){
+      $order = $request->order; // in middleware IsMyOrder
+      if( $order->status != "processing" )
+        return response()->json([
+          'status' => 'fail',
+          'message' => 'Your action is invalid please restart application'
+        ], 422);
+
+      $order->update(['status'=>'delivering']);
+      return response()->json(['status' => 'ok', 'message'=> 'Ready to Deliver']);
+    }
 }
