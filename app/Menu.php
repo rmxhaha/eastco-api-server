@@ -17,4 +17,12 @@ class Menu extends Model
   public function tenant(){
     return $this->belongsTo('App\Tenant');
   }
+
+  public function getPictureAttribute($value){
+    return action('MenuController@menu_picture', ['menu_id' => $this->id ]);
+  }
+
+  public function getPicturePath(){
+    return $this->attributes['picture'];
+  }
 }

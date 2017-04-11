@@ -13,7 +13,7 @@ class TenantController extends Controller
       $this->validate($request,[
         'description' => 'required|max:255',
         'tenant_name' => 'required|max:255',
-        'cover_picture' => 'file|image|max:4096'
+        'cover_picture' => 'file|max:16384'
       ]);
 
 
@@ -75,7 +75,7 @@ class TenantController extends Controller
         'name' => 'max:255|required',
         'description' => 'max:255|required',
         'price' => 'integer|required',
-        'picture' => 'file|image|max:4096'
+        'picture' => 'file|max:16384'
       ]);
 
       $menu_data = $this->get_menu_data_from_request($request);
@@ -101,7 +101,7 @@ class TenantController extends Controller
         'name' => 'max:255',
         'description' => 'max:255',
         'price' => 'integer',
-        'picture' => 'file|image|max:4096'
+        'picture' => 'file|max:16384'
       ]);
 
       $menu = Menu::where('id', $menu_id);

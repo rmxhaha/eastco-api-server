@@ -32,4 +32,12 @@ class Tenant extends Model
     public function finished_orders(){
       return $this->orders()->whereIn('status', [800, 900])->with('orderer')->with('details')->with('address');
     }
+
+    public function getCoverPictureAttribute($value){
+      return action('MenuController@tenant_picture', ['tenant_id' => $this->id ]);
+    }
+
+    public function getCoverPicturePath(){
+      return $this->attributes['cover_picture'];
+    }
 }
