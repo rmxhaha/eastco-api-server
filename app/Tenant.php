@@ -30,7 +30,7 @@ class Tenant extends Model
     }
 
     public function finished_orders(){
-      return $this->orders()->whereIn('status', [800, 900])->with('orderer')->with('details')->with('address');
+      return $this->orders()->whereIn('status', [800, 900])->with('orderer')->with('details')->with('address')->with('details.menu');
     }
 
     public function getCoverPictureAttribute($value){
