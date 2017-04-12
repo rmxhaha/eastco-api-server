@@ -34,6 +34,7 @@ class Tenant extends Model
     }
 
     public function getCoverPictureAttribute($value){
+      if( $value == null ) return null;
       return action('MenuController@tenant_picture', ['tenant_id' => $this->id ]);
     }
 

@@ -34,7 +34,7 @@ class MenuController extends Controller
     }
 
     public function tenant_picture(Request $request, $tenant_id){
-      $menu = Tenant::findOrFail($tenant_id);
+      $tenant = Tenant::findOrFail($tenant_id);
       return response()->file( storage_path('app/'.$tenant->getCoverPicturePath()) );
     }
 }

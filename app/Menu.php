@@ -19,6 +19,7 @@ class Menu extends Model
   }
 
   public function getPictureAttribute($value){
+    if( $value == null ) return null;
     return action('MenuController@menu_picture', ['menu_id' => $this->id ]);
   }
 

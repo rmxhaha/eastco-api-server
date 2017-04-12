@@ -63,7 +63,7 @@ Route::group(['prefix' => 'v1'], function() {
   });
 
   Route::get('/menu_picture/{menu_id}/', 'MenuController@menu_picture')->where('menu_id', '[0-9]+');
-  Route::get('/tenant_picture/{tenant_id}/', 'MenuController@menu_picture')->where('tenant_id', '[0-9]+');
+  Route::get('/tenant_picture/{tenant_id}/', 'MenuController@tenant_picture')->where('tenant_id', '[0-9]+');
 
   Route::post('/login', 'LoginController@login');
   Route::post('/register', 'RegisterController@register');
