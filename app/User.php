@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function finished_orders(){
-      return $this->orders()->whereIn('status', [800, 900]);
+      return $this->orders()->whereIn('status', [800, 900])->with('details')->with('address')->with('details.menu');
     }
 
     public function cart(){
@@ -64,6 +64,6 @@ class User extends Authenticatable
     }
 
     public function ongoing_orders(){
-      return $this->orders()->whereIn('status', [200, 201, 300]);
+      return $this->orders()->whereIn('status', [200, 201, 300])->with('details')->with('address')->with('details.menu');
     }
 }
